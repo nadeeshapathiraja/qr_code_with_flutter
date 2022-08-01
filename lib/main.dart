@@ -1,4 +1,4 @@
-import 'package:barcode_reader/qr_create_page.dart';
+import 'package:barcode_reader/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const QRCreatePage(),
+      home: const HomePage(),
     );
   }
 }
