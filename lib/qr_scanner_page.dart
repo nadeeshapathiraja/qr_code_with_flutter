@@ -11,7 +11,7 @@ class QRScannerPage extends StatefulWidget {
 }
 
 class _QRScannerPageState extends State<QRScannerPage> {
-  final QRKey = GlobalKey(debugLabel: 'QR');
+  final qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
   Barcode? barCode;
   @override
@@ -22,14 +22,13 @@ class _QRScannerPageState extends State<QRScannerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black45,
         body: Stack(
           alignment: Alignment.center,
           children: [
-            BuildQQView(context),
+            buildQQView(context),
             Positioned(
               bottom: 10,
               child: buildRewsult(),
@@ -44,8 +43,8 @@ class _QRScannerPageState extends State<QRScannerPage> {
     );
   }
 
-  Widget BuildQQView(BuildContext context) => QRView(
-        key: QRKey,
+  Widget buildQQView(BuildContext context) => QRView(
+        key: qrKey,
         onQRViewCreated: onQRViewCreated,
         overlay: QrScannerOverlayShape(
           borderWidth: 10,
