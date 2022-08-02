@@ -34,10 +34,10 @@ class _QRScannerPageState extends State<QRScannerPage> {
               bottom: 10,
               child: buildRewsult(),
             ),
-            // Positioned(
-            //   top: 10,
-            //   child: buildControllerButtons(),
-            // ),
+            Positioned(
+              top: 10,
+              child: buildControllerButtons(),
+            ),
           ],
         ),
       ),
@@ -51,13 +51,14 @@ class _QRScannerPageState extends State<QRScannerPage> {
           borderWidth: 10,
           borderLength: 20,
           borderRadius: 10,
-          cutOutSize: MediaQuery.of(context).size.width * 0.8,
+          cutOutSize: 300,
         ),
       );
 
   void onQRViewCreated(QRViewController qrViewController) {
     setState(() {
       controller = qrViewController;
+      barCode = null;
     });
 
     controller?.scannedDataStream
@@ -87,6 +88,55 @@ class _QRScannerPageState extends State<QRScannerPage> {
           style: const TextStyle(
             color: Colors.white,
           ),
+        ),
+      );
+
+  buildControllerButtons() => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white24,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            IconButton(
+              icon: FutureBuilder<bool?>(
+                future: controller?.getFlashStatus(),
+                builder: (context, snapshot) {
+                  if (snapshot.data != null) {
+                    return Icon(
+                      snapshot.data! ? Icons.flash_off : Icons.flash_on,
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
+              onPressed: () async {
+                await controller?.toggleFlash();
+                setState(() {});
+              },
+            ),
+            IconButton(
+              icon: FutureBuilder(
+                future: controller?.getCameraInfo(),
+                builder: (context, snapshot) {
+                  if (snapshot.data != null) {
+                    return const Icon(Icons.switch_camera);
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
+              onPressed: () async {
+                await controller?.flipCamera();
+                setState(() {});
+              },
+            ),
+          ],
         ),
       );
 }
