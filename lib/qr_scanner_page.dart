@@ -10,6 +10,19 @@ class QRScannerPage extends StatefulWidget {
 class _QRScannerPageState extends State<QRScannerPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: const [
+                // BuildQQView(context),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

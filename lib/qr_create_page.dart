@@ -13,6 +13,7 @@ class _QRCreatePageState extends State<QRCreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black45,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -31,21 +32,24 @@ class _QRCreatePageState extends State<QRCreatePage> {
                   const SizedBox(height: 30),
                   QrImage(
                     data: controller.text,
-                    size: 200,
+                    size: 250,
                     backgroundColor: Colors.white,
                   ),
                   const SizedBox(height: 20),
                   TextField(
                     controller: controller,
                     decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white70,
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {});
                         },
                         icon: const Icon(Icons.done),
                       ),
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(
                           width: 3,
                           color: Colors.greenAccent,
                         ), //<-- SEE HERE
